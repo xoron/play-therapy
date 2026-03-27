@@ -2,27 +2,44 @@ import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {motion, useReducedMotion} from 'framer-motion';
 import {PLACEHOLDER_IMAGES} from '@site/src/data/placeholderImages';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
+import {
+  SCROLL_VIEWPORT,
+  heroFigureVariants,
+  heroStaggerVariants,
+  homeTransition,
+} from '@site/src/utils/homeMotion';
 
 import styles from './index.module.css';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
+  const prefersReducedMotion = useReducedMotion();
+  const hero = heroStaggerVariants(prefersReducedMotion);
+  const figureVariants = heroFigureVariants(prefersReducedMotion);
 
   return (
-    <header
-      className={clsx('hero', 'pt-hero--home', styles.heroBanner)}>
+    <header className={clsx('hero', 'pt-hero--home', styles.heroBanner)}>
       <div className={clsx('container', styles.heroInner)}>
         <div className={styles.heroGrid}>
-          <div>
-            <Heading as="h1" className="hero__title">
-              {siteConfig.title}
-            </Heading>
-            <p className="hero__subtitle">{siteConfig.tagline}</p>
-            <div className={styles.buttons}>
+          <motion.div
+            className={styles.heroTextCol}
+            variants={hero.container}
+            initial="hidden"
+            animate="visible">
+            <motion.div variants={hero.item}>
+              <Heading as="h1" className="hero__title">
+                {siteConfig.title}
+              </Heading>
+            </motion.div>
+            <motion.p className="hero__subtitle" variants={hero.item}>
+              {siteConfig.tagline}
+            </motion.p>
+            <motion.div className={styles.buttons} variants={hero.item}>
               <Link
                 className="button button--secondary button--lg"
                 to="/docs/contact">
@@ -33,9 +50,13 @@ function HomepageHeader() {
                 to="/docs/approach">
                 How we work
               </Link>
-            </div>
-          </div>
-          <figure className={styles.heroVisual}>
+            </motion.div>
+          </motion.div>
+          <motion.figure
+            className={styles.heroVisual}
+            variants={figureVariants}
+            initial="hidden"
+            animate="visible">
             <img
               src={PLACEHOLDER_IMAGES.hero}
               alt="Stock photo example (children at play) — replace with your own hero image"
@@ -43,7 +64,7 @@ function HomepageHeader() {
               height={360}
               loading="eager"
             />
-          </figure>
+          </motion.figure>
         </div>
       </div>
     </header>
@@ -51,8 +72,19 @@ function HomepageHeader() {
 }
 
 function ServicesSnapshot(): ReactNode {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section className={styles.section}>
+    <motion.section
+      className={styles.section}
+      initial={
+        prefersReducedMotion
+          ? {opacity: 1, y: 0}
+          : {opacity: 0, y: 32}
+      }
+      whileInView={{opacity: 1, y: 0}}
+      viewport={SCROLL_VIEWPORT}
+      transition={homeTransition(prefersReducedMotion)}>
       <div className="container">
         <div className="row">
           <div className="col col--8 col--offset-2">
@@ -85,24 +117,46 @@ function ServicesSnapshot(): ReactNode {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
 function TrustStrip(): ReactNode {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <div className={styles.trustStrip}>
+    <motion.div
+      className={styles.trustStrip}
+      initial={
+        prefersReducedMotion
+          ? {opacity: 1, y: 0}
+          : {opacity: 0, y: 16}
+      }
+      whileInView={{opacity: 1, y: 0}}
+      viewport={SCROLL_VIEWPORT}
+      transition={homeTransition(prefersReducedMotion, {duration: 0.45})}>
       <p>
         <strong>Placeholder:</strong> Licensed clinician · Specialized training
         in play therapy · Serving [your city or region]
       </p>
-    </div>
+    </motion.div>
   );
 }
 
 function ClosingCTA(): ReactNode {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section className={clsx(styles.sectionMuted, styles.ctaBand)}>
+    <motion.section
+      className={clsx(styles.sectionMuted, styles.ctaBand)}
+      initial={
+        prefersReducedMotion
+          ? {opacity: 1, y: 0}
+          : {opacity: 0, y: 36}
+      }
+      whileInView={{opacity: 1, y: 0}}
+      viewport={SCROLL_VIEWPORT}
+      transition={homeTransition(prefersReducedMotion, {duration: 0.58})}>
       <div className="container">
         <Heading as="h2">Ready to learn more?</Heading>
         <p>
@@ -120,7 +174,7 @@ function ClosingCTA(): ReactNode {
           </Link>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

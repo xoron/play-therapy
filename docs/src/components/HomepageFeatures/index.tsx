@@ -1,7 +1,9 @@
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
+import {motion, useReducedMotion} from 'framer-motion';
 import {PLACEHOLDER_IMAGES} from '@site/src/data/placeholderImages';
+import {SCROLL_VIEWPORT, homeTransition} from '@site/src/utils/homeMotion';
 import styles from './styles.module.css';
 
 type FeatureItem = {
@@ -47,9 +49,30 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({title, image, imageAlt, description}: FeatureItem) {
+function Feature({
+  title,
+  image,
+  imageAlt,
+  description,
+  index,
+  prefersReducedMotion,
+}: FeatureItem & {
+  index: number;
+  prefersReducedMotion: boolean | null;
+}) {
+  const hidden = prefersReducedMotion
+    ? {opacity: 1, y: 0}
+    : {opacity: 0, y: 40};
+
   return (
-    <div className={clsx('col col--4')}>
+    <motion.div
+      className={clsx('col col--4')}
+      initial={hidden}
+      whileInView={{opacity: 1, y: 0}}
+      viewport={SCROLL_VIEWPORT}
+      transition={homeTransition(prefersReducedMotion, {
+        delay: prefersReducedMotion ? 0 : index * 0.14,
+      })}>
       <div className="text--center">
         <img
           className={styles.featureImage}
@@ -64,17 +87,24 @@ function Feature({title, image, imageAlt, description}: FeatureItem) {
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function HomepageFeatures(): ReactNode {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className={styles.features}>
       <div className="container">
         <div className="row">
           {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+            <Feature
+              key={idx}
+              {...props}
+              index={idx}
+              prefersReducedMotion={prefersReducedMotion}
+            />
           ))}
         </div>
       </div>

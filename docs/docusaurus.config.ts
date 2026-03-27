@@ -32,8 +32,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl:
-            'https://github.com/xoron/play-therapy/edit/main/docs/docs/',
         },
         blog: false,
         theme: {

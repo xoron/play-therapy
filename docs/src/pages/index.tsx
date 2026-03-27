@@ -38,9 +38,10 @@ function HomepageHeader() {
           <figure className={styles.heroVisual}>
             <img
               src={PLACEHOLDER_IMAGES.hero}
-              alt="Placeholder hero image — replace with a welcoming photo of your play space or logo"
+              alt="Stock photo example (children at play) — replace with your own hero image"
               width={640}
               height={360}
+              loading="eager"
             />
           </figure>
         </div>

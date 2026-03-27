@@ -57,6 +57,7 @@ function Feature({title, image, imageAlt, description}: FeatureItem) {
           alt={imageAlt}
           width={200}
           height={200}
+          loading="lazy"
         />
       </div>
       <div className="text--center padding-horiz--md">

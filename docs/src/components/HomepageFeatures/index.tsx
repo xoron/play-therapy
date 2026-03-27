@@ -1,52 +1,63 @@
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
+import {PLACEHOLDER_IMAGES} from '@site/src/data/placeholderImages';
 import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  image: string;
+  imageAlt: string;
   description: ReactNode;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Child-led play',
+    image: PLACEHOLDER_IMAGES.feature1,
+    imageAlt: 'Placeholder illustration for child-led play',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Children often communicate and heal through <strong>play</strong>. We
+        follow their lead in a structured, safe environment.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'A steady relationship',
+    image: PLACEHOLDER_IMAGES.feature2,
+    imageAlt: 'Placeholder illustration for therapeutic relationship',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Progress grows from a warm, dependable connection—so your child can
+        explore feelings at their own pace.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Partnership with you',
+    image: PLACEHOLDER_IMAGES.feature3,
+    imageAlt: 'Placeholder illustration for caregiver collaboration',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Caregivers are essential. We collaborate with you on goals, updates, and
+        strategies that fit your <strong>real life</strong> at home.
       </>
     ),
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({title, image, imageAlt, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        <img
+          className={styles.featureImage}
+          src={image}
+          alt={imageAlt}
+          width={200}
+          height={200}
+        />
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>

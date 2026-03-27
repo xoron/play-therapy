@@ -1,30 +1,122 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Dandelion-inspired theme: warm gold, soft greens, cream backgrounds.
  */
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #c9a227;
+  --ifm-color-primary-dark: #b08f20;
+  --ifm-color-primary-darker: #a6861e;
+  --ifm-color-primary-darkest: #896f19;
+  --ifm-color-primary-light: #d4b03d;
+  --ifm-color-primary-lighter: #d7b64a;
+  --ifm-color-primary-lightest: #dfca74;
+  --ifm-background-color: #fdfbf6;
+  --ifm-font-color-base: #2c2a26;
+  --ifm-heading-color: #252320;
+  --ifm-link-color: #5d7c3e;
+  --ifm-link-hover-color: #4a632f;
+  --ifm-footer-background-color: #2d3d28;
+  --ifm-navbar-background-color: #fdfbf6;
+  --ifm-card-background-color: #ffffff;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(201, 162, 39, 0.12);
+  --pt-hero-glow: rgba(212, 176, 61, 0.35);
+  --pt-hero-accent: rgba(93, 124, 62, 0.12);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #e3c35c;
+  --ifm-color-primary-dark: #deb74a;
+  --ifm-color-primary-darker: #dbb141;
+  --ifm-color-primary-darkest: #d39a20;
+  --ifm-color-primary-light: #e6ca6e;
+  --ifm-color-primary-lighter: #e9d17a;
+  --ifm-color-primary-lightest: #efe196;
+  --ifm-background-color: #1a1c18;
+  --ifm-font-color-base: #ebe8e0;
+  --ifm-heading-color: #f5f2ea;
+  --ifm-link-color: #a4c273;
+  --ifm-link-hover-color: #b8d48a;
+  --ifm-footer-background-color: #141614;
+  --ifm-navbar-background-color: #1a1c18;
+  --ifm-card-background-color: #222420;
+  --docusaurus-highlighted-code-line-bg: rgba(227, 195, 92, 0.15);
+  --pt-hero-glow: rgba(227, 195, 92, 0.2);
+  --pt-hero-accent: rgba(164, 194, 115, 0.1);
+}
+
+/* Homepage hero: soft “seed head” glow */
+.pt-hero--home {
+  background: linear-gradient(
+    160deg,
+    var(--ifm-color-primary) 0%,
+    #b8860b 45%,
+    #6b8e3d 100%
+  );
+  color: #fffdf8;
+  position: relative;
+}
+
+.pt-hero--home::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 60% at 70% 20%,
+    var(--pt-hero-glow) 0%,
+    transparent 55%
+  );
+  pointer-events: none;
+}
+
+.pt-hero--home .hero__title,
+.pt-hero--home .hero__subtitle {
+  color: #fffdf8;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.pt-hero--home .button--secondary {
+  --ifm-button-background-color: rgba(255, 253, 248, 0.95);
+  --ifm-button-border-color: transparent;
+  color: #4a632f;
+}
+
+.pt-hero--home .button--secondary:hover {
+  --ifm-button-background-color: #fff;
+  color: #3d5227;
+}
+
+.pt-hero--home .button--outline {
+  --ifm-button-border-color: rgba(255, 253, 248, 0.85);
+  --ifm-button-background-color: transparent;
+  color: #fffdf8;
+}
+
+.pt-hero--home .button--outline:hover {
+  --ifm-button-background-color: rgba(255, 253, 248, 0.15);
+  color: #fff;
+}
+
+.footer--dark {
+  --ifm-footer-link-color: #e3c35c;
+  --ifm-footer-link-hover-color: #efe196;
+}
+
+/* Doc pages (MDX) — stock photo blocks */
+.doc-inline-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 1.25rem 0 1.75rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .doc-inline-image {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+.doc-inline-image--center {
+  margin-left: auto;
+  margin-right: auto;
 }
